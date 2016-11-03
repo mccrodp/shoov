@@ -1,9 +1,9 @@
 FROM node:6.5
-MAINTAINER Paul McCrodden "paul.mccrodden@gmail.com"
+MAINTAINER Paul McCrodden "paul.mccrodden@x-team.com"
 
-ADD . /var/www/auto-exam
+ADD . /var/www/
 
-WORKDIR /var/www/auto-exam
+WORKDIR /var/www/
 
 # Run apt-get updates & installs
 RUN apt-get update
