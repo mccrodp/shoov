@@ -1,9 +1,7 @@
 FROM node:6.5
 MAINTAINER Paul McCrodden "paul.mccrodden@x-team.com"
 
-ADD . /var/www/
-
-WORKDIR /var/www/
+ADD ./.shoov.json /root/.shoov.json
 
 # Run apt-get updates & installs
 RUN apt-get update
@@ -17,3 +15,7 @@ RUN npm install -g mocha yo generator-shoov
 
 # Install composer globally
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+WORKDIR /var/www/
+
+EXPOSE 80
