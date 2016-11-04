@@ -6,4 +6,4 @@ services:
       - "80:80"
     working_dir: /home/docker/
     volumes:
-      - ./.shoov.json:/home/docker/.shoov.json
+      - ./:/home/docker

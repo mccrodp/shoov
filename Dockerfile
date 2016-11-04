@@ -20,6 +20,6 @@ USER docker
 
 WORKDIR /home/docker/
 
-ADD ./.shoov.json /home/docker/.shoov.json
+ADD . /home/docker/
 
 EXPOSE 80
