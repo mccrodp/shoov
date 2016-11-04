@@ -4,6 +4,6 @@ services:
     build: .
     ports:
       - "80:80"
-    working_dir: /var/www/
+    working_dir: /home/docker/
     volumes:
-      - ./.shoov.json:/root/.shoov.json
+      - ./.shoov.json:/home/docker/.shoov.json
