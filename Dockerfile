@@ -1,12 +1,16 @@
-FROM node:6.5
+FROM php:7.0.12-cli
 MAINTAINER Paul McCrodden "paul.mccrodden@x-team.com"
 
 # Run apt-get updates & installs
-RUN apt-get update
-RUN apt-get -qq update
-RUN apt-get install curl php5-cli git -y
-RUN apt-get install nodejs npm -y
-RUN apt-get install graphicsmagick -y
+RUN apt-get update \
+    && apt-get -qq update \
+    && apt-get install curl git graphicsmagick -y \
+    && docker-php-ext-install opcache pdo json
+
+# Install nodejs & npm
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
+    apt-get install nodejs -y && \
+    npm install -g npm
 
 # Install composer globally
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -21,5 +25,3 @@ USER docker
 WORKDIR /home/docker/
 
 ADD . /home/docker/
-
-EXPOSE 80

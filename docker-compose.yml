@@ -1,9 +1,7 @@
 version: '2'
 services:
-  web:
+  shoov:
     build: .
-    ports:
-      - "80:80"
     working_dir: /home/docker/
     volumes:
       - ./:/home/docker
