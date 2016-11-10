@@ -1,6 +1,6 @@
 version: '2'
 services:
-  shoov:
+  test:
     build: .
     working_dir: /home/docker/
     volumes:
