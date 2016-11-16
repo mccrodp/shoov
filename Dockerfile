@@ -2,7 +2,7 @@ FROM php:7.0.12-cli
 MAINTAINER Paul McCrodden "paul.mccrodden@x-team.com"
 
 # Run apt-get updates & installs
-RUN apt-get update \
+RUN apt-get clean && apt-get update \
     && apt-get -qq update \
     && apt-get install curl git graphicsmagick -y \
     && docker-php-ext-install opcache pdo json
@@ -16,10 +16,10 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
     npm install -g npm && \
     npm install -g mocha yo generator-shoov
 
-# Add docker user for npm and yo
-RUN useradd -ms /bin/bash docker
-USER docker
+# Add shoov user for npm and yo
+RUN useradd -ms /bin/bash shoov
+USER shoov
 
-WORKDIR /home/docker/
+WORKDIR /home/shoov/
 
-ADD . /home/docker/
+ADD . /home/shoov/
