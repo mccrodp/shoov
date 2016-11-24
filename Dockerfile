@@ -23,3 +23,8 @@ USER shoov
 WORKDIR /home/shoov/
 
 ADD . /home/shoov/
+
+# Shoov's webdrivercss work around that expects a GitHub repo in project root.
+RUN git clone $REPO_URL .
+
+CMD yo shoov --base-url=$BASE_URL
