@@ -29,7 +29,7 @@ ADD . /home/shoov/
 
 # Webdrivercss / Shoov work around (GitHub repo requirement).
 RUN git init
-RUN git remote add origin REPO_URL
+RUN git remote set-url --add origin REPO_URL
 RUN git add .
 RUN git commit -m "Dummy commit"
 
