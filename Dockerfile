@@ -39,6 +39,5 @@ RUN git config user.email "info@paulmccrodden.com"
 RUN git config user.name "Paul McCrodden"
 RUN git remote set-url --add origin REPO_URL
 RUN git add .
-RUN git commit -m "Dummy commit"
 
 CMD yo shoov --base-url=BASE_URL
