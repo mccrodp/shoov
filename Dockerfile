@@ -21,6 +21,11 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
 
 # Add shoov user for npm and yo
 RUN useradd -ms /bin/bash shoov
+
+# Change .git access to avoid locking error in following Shoov work around.
+RUN chown -R shoov:shoov .git
+
+# Change to shoov user
 USER shoov
 
 WORKDIR /home/shoov/
