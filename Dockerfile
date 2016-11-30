@@ -4,6 +4,8 @@ MAINTAINER Paul McCrodden "paul.mccrodden@x-team.com"
 ARG REPO_URL
 ARG BASE_URL
 
+WORKDIR /home/shoov/
+
 # Run apt-get updates & installs
 RUN apt-get clean && apt-get update \
     && apt-get -qq update \
@@ -22,17 +24,16 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
 # Add shoov user for npm and yo
 RUN useradd -ms /bin/bash shoov
 
-# Change .git access to avoid locking error in following Shoov work around.
-RUN chown -R shoov:shoov .git
+# Add the current directory to container
+ADD . /home/shoov/
+
+# Force ownership to avoid git locking error (for GitHub repo requirement)
+RUN chown -R shoov:shoov .
 
 # Change to shoov user
 USER shoov
 
-WORKDIR /home/shoov/
-
-ADD . /home/shoov/
-
-# Webdrivercss / Shoov work around (GitHub repo requirement).
+# Webdrivercss / Shoov work around (for GitHub repo requirement)
 RUN git init
 RUN git remote set-url --add origin REPO_URL
 RUN git add .
