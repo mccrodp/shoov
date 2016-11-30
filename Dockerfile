@@ -35,6 +35,8 @@ USER shoov
 
 # Webdrivercss / Shoov work around (for GitHub repo requirement)
 RUN git init
+RUN git config user.email "info@paulmccrodden.com"
+RUN git config user.name "Paul McCrodden"
 RUN git remote set-url --add origin REPO_URL
 RUN git add .
 RUN git commit -m "Dummy commit"
