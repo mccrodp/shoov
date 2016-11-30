@@ -25,7 +25,7 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
 RUN useradd -ms /bin/bash shoov
 
 # Add the current directory to container
-ADD . /home/shoov/
+ADD . .
 
 # Force ownership to avoid git locking error (for GitHub repo requirement)
 RUN chown -R shoov:shoov .
