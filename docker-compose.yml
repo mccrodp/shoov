@@ -5,3 +5,4 @@ services:
     working_dir: /home/shoov/
     volumes:
       - ./:/home/shoov
+    env_file: ./vars.env

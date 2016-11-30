@@ -1,6 +1,9 @@
 FROM php:7.0.12-cli
 MAINTAINER Paul McCrodden "paul.mccrodden@x-team.com"
 
+ARG REPO_URL
+ARG BASE_URL
+
 # Run apt-get updates & installs
 RUN apt-get clean && apt-get update \
     && apt-get -qq update \
@@ -23,3 +26,11 @@ USER shoov
 WORKDIR /home/shoov/
 
 ADD . /home/shoov/
+
+# Webdrivercss / Shoov work around (GitHub repo requirement).
+RUN git init
+RUN git remote add origin ${REPO_URL}
+RUN git add .
+RUN git commit -m "Dummy commit"
+
+CMD yo shoov --base-url=${BASE_URL}
