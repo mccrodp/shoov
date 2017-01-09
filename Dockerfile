@@ -2,7 +2,7 @@ FROM php:7.0.12-cli
 MAINTAINER Paul McCrodden "paul.mccrodden@x-team.com"
 
 ARG REPO_URL
-ARG BASE_URL
+ENV BASE_URL http://pages.shoov.io
 
 WORKDIR /home/shoov/
 
@@ -10,7 +10,7 @@ WORKDIR /home/shoov/
 RUN apt-get clean && apt-get update \
     && apt-get -qq update \
     && apt-get install curl git graphicsmagick -y \
-    && docker-php-ext-install opcache pdo json
+    && docker-php-ext-install opcache
 
   # Install composer globally
   RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -40,4 +40,4 @@ RUN git config user.name "Paul McCrodden"
 RUN git remote set-url --add origin REPO_URL
 RUN git add .
 
-CMD yo shoov --base-url=BASE_URL
+ENTRYPOINT yo shoov --base-url=${BASE_URL}
