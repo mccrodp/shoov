@@ -1,14 +1,17 @@
 FROM php:7.0.12-cli
 MAINTAINER Paul McCrodden "paul.mccrodden@x-team.com"
 
+# Run in non interactive mode
+ARG DEBIAN_FRONTEND=noninteractive
+
+# Add build and runtime arg
 ARG REPO_URL
 ENV BASE_URL http://pages.shoov.io
-
-WORKDIR /home/shoov/
 
 # Run apt-get updates & installs
 RUN apt-get clean && apt-get update \
     && apt-get -qq update \
+    && apt-get install -y --no-install-recommends apt-utils \
     && apt-get install curl git graphicsmagick -y \
     && docker-php-ext-install opcache
 
@@ -23,6 +26,9 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x | bash - && \
 
 # Add shoov user for npm and yo
 RUN useradd -ms /bin/bash shoov
+
+# Work from shoov user home dir
+WORKDIR /home/shoov/
 
 # Add the current directory to container
 ADD . .
@@ -40,4 +46,6 @@ RUN git config user.name "Paul McCrodden"
 RUN git remote set-url --add origin REPO_URL
 RUN git add .
 
-ENTRYPOINT yo shoov --base-url=${BASE_URL}
+# @todo: add supervisord to add multiple entrypoints
+#ENTRYPOINT yo shoov --base-url=${BASE_URL}
+ENTRYPOINT /bin/bash
